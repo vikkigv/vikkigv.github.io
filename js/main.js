@@ -158,12 +158,28 @@
       toTop.classList.toggle("show", window.scrollY > 600);
     };
 
+    var animateScrollToTop = function () {
+      if (prefersReduced) {
+        window.scrollTo(0, 0);
+        return;
+      }
+      var start = window.scrollY;
+      var duration = 600;
+      var t0 = null;
+      var step = function (ts) {
+        if (t0 === null) t0 = ts;
+        var progress = Math.min((ts - t0) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        window.scrollTo(0, Math.round(start * (1 - eased)));
+        if (progress < 1) window.requestAnimationFrame(step);
+      };
+      window.requestAnimationFrame(step);
+    };
+
     window.addEventListener("scroll", toggleToTop, { passive: true });
     toggleToTop();
 
-    toTop.addEventListener("click", function () {
-      window.scrollTo({ top: 0, behavior: prefersReduced ? "auto" : "smooth" });
-    });
+    toTop.addEventListener("click", animateScrollToTop);
   }
 
   /* ----- Scrollspy (nav active link) ----- */
