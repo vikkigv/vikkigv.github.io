@@ -150,6 +150,22 @@
     }
   }
 
+  /* ----- Scroll-to-top button ----- */
+  var toTop = document.getElementById("toTop");
+
+  if (toTop) {
+    var toggleToTop = function () {
+      toTop.classList.toggle("show", window.scrollY > 600);
+    };
+
+    window.addEventListener("scroll", toggleToTop, { passive: true });
+    toggleToTop();
+
+    toTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: prefersReduced ? "auto" : "smooth" });
+    });
+  }
+
   /* ----- Scrollspy (nav active link) ----- */
   var sections = document.querySelectorAll("main section[id]");
   var navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');

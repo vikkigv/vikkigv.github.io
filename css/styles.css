@@ -696,6 +696,48 @@ h2 {
   margin-bottom: 22px;
 }
 
+/* ---------- Scroll-to-top button ---------- */
+
+.to-top {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 40;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--accent);
+  border: 1px solid var(--border-strong);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s,
+    background 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.to-top:hover {
+  background: var(--accent);
+  color: #06251a;
+  box-shadow: 0 8px 28px rgba(52, 211, 153, 0.35);
+}
+
+.to-top:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 /* ---------- Footer ---------- */
 
 .footer {
@@ -782,4 +824,5 @@ h2 {
   .cursor, .t-caret { animation: none; }
   .metric-fill { transition: none; }
   .btn, .project-card, .timeline-card, .mini-card { transition: none; }
+  .to-top { transition: none; }
 }
