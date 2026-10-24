@@ -36,6 +36,9 @@ Open `index.html` and search for `TODO(vignesh)`:
 - **Stats numbers** — the hero strip reads `data-value` / `data-suffix` attributes; update those.
 - **Colors** — change the CSS variables at the top of `css/styles.css` (`--accent`, `--bg`, etc.).
 - **Typewriter roles** — edit the `roles` array in `js/main.js`.
+- **After changing `main.js` or `styles.css`** — bump the version number in `index.html`
+  (`main.js?v=1` → `?v=2`, `styles.css?v=1` → `?v=2`) so visitors' browsers fetch the
+  new file immediately instead of showing a cached copy for up to 10 minutes.
 
 ## Deploy (free)
 
