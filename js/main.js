@@ -159,14 +159,17 @@
     };
 
     var animateScrollToTop = function () {
+      var start = window.scrollY;
+      if (start === 0) return;
       if (prefersReduced) {
         window.scrollTo(0, 0);
         return;
       }
-      var start = window.scrollY;
-      var duration = 600;
       var t0 = null;
+      var stepped = false;
+      var duration = 600;
       var step = function (ts) {
+        stepped = true;
         if (t0 === null) t0 = ts;
         var progress = Math.min((ts - t0) / duration, 1);
         var eased = 1 - Math.pow(1 - progress, 3);
@@ -174,6 +177,10 @@
         if (progress < 1) window.requestAnimationFrame(step);
       };
       window.requestAnimationFrame(step);
+      // If animation frames never fire (throttled/background page), jump instead
+      window.setTimeout(function () {
+        if (!stepped) window.scrollTo(0, 0);
+      }, 700);
     };
 
     window.addEventListener("scroll", toggleToTop, { passive: true });
